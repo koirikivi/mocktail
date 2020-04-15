@@ -23,7 +23,6 @@ Installation
 
 `pip install mock-when`
 
-
 Buyer beware!
 -------------
 
@@ -34,6 +33,12 @@ Contributing
 ------------
 
 Pull requests and bug reports are gladly accepted in this Github repository.
+
+
+License
+-------
+
+MIT
 
 TODO
 ----
