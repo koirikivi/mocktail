@@ -1,6 +1,9 @@
 from unittest import mock
 
-from when import when
+from when import (
+    when,
+    Any,
+)
 
 
 def test_when_method_call():
@@ -8,6 +11,12 @@ def test_when_method_call():
     when(my_mock).some_method("foo").then_return("bar")
     assert my_mock.some_method("foo") == "bar"
     assert my_mock.some_method("baz") != "bar"
+
+
+def test_when_direct_call():
+    my_mock = mock.MagicMock()
+    when(my_mock)("o").then_return("k")
+    assert my_mock("o") == "k"
 
 
 def test_multiple_when_method_calls():
@@ -28,3 +37,17 @@ def test_multiple_when_method_calls_order():
     when(my_mock).some_method("a").then_return("A")
     when(my_mock).some_method("a").then_return("B")
     assert my_mock.some_method("a") == "B"
+
+
+def test_matcher_any():
+    my_mock = mock.MagicMock()
+    when(my_mock).foo(Any()).then_return("foo")
+    assert my_mock.foo(123) == "foo"
+    assert my_mock.foo() != "foo"
+
+
+def test_matcher_any_type():
+    my_mock = mock.MagicMock()
+    when(my_mock).foo(Any(str)).then_return("foo")
+    assert my_mock.foo("123") == "foo"
+    assert my_mock.foo(123) != "foo"

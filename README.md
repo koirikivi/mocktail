@@ -44,5 +44,5 @@ MIT
 
 TODO
 ----
-- Matchers
+- (More) matchers
 - Docs
