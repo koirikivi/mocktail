@@ -1,6 +1,8 @@
 mock-when
 =========
 
+[![Build Status](https://travis-ci.org/koirikivi/mock-when.svg?branch=master)](https://travis-ci.org/koirikivi/mock-when)
+
 This package provides dead-simple utilities for setting return values for mocks
 with a Mockito-inspired syntax:
 
