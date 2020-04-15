@@ -39,11 +39,14 @@ class CallProxy:
 
     def then_return(self, value):
         default = self._mock.return_value
+        existing_side_effect = self._mock.side_effect
 
         def side_effect(*args, **kwargs):
             if args == self._call_args and \
                     kwargs == self._call_kwargs:
                 return value
+            if existing_side_effect is not None:
+                return existing_side_effect(*args, **kwargs)
             return default
 
         self._mock.side_effect = side_effect
