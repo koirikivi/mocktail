@@ -1,7 +1,5 @@
 from unittest import mock
 
-import pytest
-
 from when import when
 
 

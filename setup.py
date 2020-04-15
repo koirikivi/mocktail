@@ -12,7 +12,8 @@ setup(
     extras_require={
         'testing': [
             'pytest',
-            'pytest-watch'
+            'pytest-watch',
+            'flake8',
         ]
     }
 )
