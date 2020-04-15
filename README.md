@@ -1,14 +1,16 @@
-mock-when
-=========
+Mocktail
+========
 
-[![Build Status](https://travis-ci.org/koirikivi/mock-when.svg?branch=master)](https://travis-ci.org/koirikivi/mock-when)
+The non-alcoholic, Mockito-inspired utility for `unittest.mock`!
+
+[![Build Status](https://travis-ci.org/koirikivi/mocktail.svg?branch=master)](https://travis-ci.org/koirikivi/mocktail)
 
 This package provides dead-simple utilities for setting return values for mocks
 with a Mockito-inspired syntax:
 
 ```python
 from unittest.mock import MagicMock
-from when import when
+from mocktail import when
 
 my_mock = MagicMock()
 when(my_mock).some_method('foo').then_return('bar')
@@ -23,7 +25,7 @@ values of arbitrary objects, combine with `unittest.mock.patch`.
 Installation
 ------------
 
-`pip install mock-when`
+`pip install mocktail`
 
 Buyer beware!
 -------------

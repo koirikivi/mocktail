@@ -16,7 +16,7 @@ def when(mock: Mock) -> 'WhenProxy':
     Shortcut for returning `WhenProxy` for a mock object.
     Provides a nice interface for mocking up method calls, ie:
 
-        when(my_mock).some_method('foo').then_return('bar')
+        mocktail(my_mock).some_method('foo').then_return('bar')
 
     :param mock: An object that derives from `unittest.mock.Mock`
     :return: A `WhenProxy` object for the mock

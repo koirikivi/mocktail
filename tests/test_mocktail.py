@@ -1,6 +1,6 @@
 from unittest import mock
 
-from when import (
+from mocktail import (
     when,
     Any,
 )
