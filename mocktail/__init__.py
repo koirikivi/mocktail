@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 import itertools
 from unittest.mock import Mock
+import typing as t
 
 __all__ = [
     'when',
@@ -8,6 +9,7 @@ __all__ = [
     'CallProxy',
     'Matcher',
     'Any',
+    'Match',
 ]
 
 
@@ -87,12 +89,14 @@ class CallProxy:
 
 
 class Matcher(metaclass=ABCMeta):
+    """Base class to derive matchers from"""
     @abstractmethod
-    def matches(self, value):
+    def matches(self, value: t.Any) -> bool:
         ...
 
 
 class Any(Matcher):
+    """Match anything. Optionally also checks `type`"""
     def __init__(self, type=None):
         self._type = type
 
@@ -101,3 +105,13 @@ class Any(Matcher):
             return isinstance(value, self._type)
         else:
             return True
+
+
+class Match(Matcher):
+    """Run `callback` against argument, matching if it returns True"""
+    def __init__(self,
+                 callback: t.Callable[[t.Any], bool] = None):
+        self._callback = callback
+
+    def matches(self, value):
+        return self._callback(value)

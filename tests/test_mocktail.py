@@ -3,6 +3,7 @@ from unittest import mock
 from mocktail import (
     when,
     Any,
+    Match,
 )
 
 
@@ -51,3 +52,20 @@ def test_matcher_any_type():
     when(my_mock).foo(Any(str)).then_return("foo")
     assert my_mock.foo("123") == "foo"
     assert my_mock.foo(123) != "foo"
+
+
+def test_callback_matcher_basic():
+    my_mock = mock.MagicMock()
+    when(my_mock).foo(Match(callback=lambda x: True)).then_return("match")
+    assert my_mock.foo(123) == "match"
+    assert my_mock.foo(456) == "match"
+    assert my_mock.foo() != "match"
+
+
+def test_callback_matcher_startswitch():
+    my_mock = mock.MagicMock()
+    when(my_mock).foo(Match(callback=lambda x: x.startswith('foo'))).then_return("match")
+    assert my_mock.foo('foobar') == "match"
+    assert my_mock.foo('foo') == "match"
+    assert my_mock.foo('barfoo') != "match"
+    assert my_mock.foo('x') != "match"
