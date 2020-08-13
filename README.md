@@ -51,3 +51,8 @@ TODO
 - Matcher for "rest of args / kwargs"
 - `verify` syntax
 - Docs
+- Some way to make "missed" matches more explicit, ie. raising an error
+  e.g. `when(...).foo(...).then_return(...).raise_missing()`
+  or `when(..., raise_missing=True).foo(...).then_return(...)`
+- Refactor the logic when hooking multiple `then_returns` for call proxies.
+  Currently, it should work because existing `side_effect` is called, but it's a bit hairy
