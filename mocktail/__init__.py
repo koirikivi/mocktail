@@ -49,12 +49,15 @@ class CallProxy:
         )
 
     def then_return(self, value):
+        return self.then(lambda *_, **__: value)
+
+    def then(self, callback: t.Callable[..., t.Any]):
         default = self._mock.return_value
         existing_side_effect = self._mock.side_effect
 
         def side_effect(*args, **kwargs):
             if self._check_call_match(args, kwargs):
-                return value
+                return callback(*args, **kwargs)
             if existing_side_effect is not None:
                 return existing_side_effect(*args, **kwargs)
             return default

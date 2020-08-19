@@ -1,3 +1,4 @@
+import pytest
 from unittest import mock
 
 from mocktail import (
@@ -7,11 +8,30 @@ from mocktail import (
 )
 
 
-def test_when_method_call():
+def test_when_method_call_then_return():
     my_mock = mock.MagicMock()
     when(my_mock).some_method("foo").then_return("bar")
     assert my_mock.some_method("foo") == "bar"
     assert my_mock.some_method("baz") != "bar"
+
+
+def test_when_method_call_then():
+    my_mock = mock.MagicMock()
+    when(my_mock).some_method("foo").then(lambda x: x + "bar")
+    assert my_mock.some_method("foo") == "foobar"
+    assert my_mock.some_method("baz") != "foobar"
+
+
+def test_when_method_call_then_raise_error():
+    my_mock = mock.MagicMock()
+
+    def error(arg):
+        raise TabError(arg)
+
+    when(my_mock).some_method("foo").then(error)
+    my_mock.some_method("baz")
+    with pytest.raises(TabError):
+        my_mock.some_method("foo")
 
 
 def test_when_direct_call():
