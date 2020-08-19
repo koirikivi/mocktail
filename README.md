@@ -56,3 +56,4 @@ TODO
   or `when(..., raise_missing=True).foo(...).then_return(...)`
 - Refactor the logic when hooking multiple `then_returns` for call proxies.
   Currently, it should work because existing `side_effect` is called, but it's a bit hairy
+- The matcher interface could be removed and instead we could just overwrite `__eq__` for matchers
